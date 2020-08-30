@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = "mongodb+srv://kevin:node1234@cluster0.kmmuu.mongodb.net/test";
+const MONGODB_URI = "mongodb+srv://kevin:node1234@cluster0.kmmuu.mongodb.net/shopify";
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

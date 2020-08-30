@@ -12,7 +12,23 @@ exports.postSignUp = (req, res) => {
     const {username, password, confirmPassword} = req.body;
 
     User.find({username: username})
-        .then(res => console.log(res))
+        .then(user => {
+            if(user.length){
+               return res.redirect('./login');
+            }
+
+            if(password !== confirmPassword){
+                return res.redirect('./login');
+            }
+
+            const newUser = new User({
+                username,
+                password
+            })
+
+            return newUser.save();
+        })
+        .then(() => res.status(200).redirect('/'))
         .catch(err => console.log(err));
 
 }
