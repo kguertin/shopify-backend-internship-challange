@@ -1,3 +1,5 @@
+const path = require('path');
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -9,6 +11,7 @@ const MONGODB_URI = "mongodb+srv://kevin:node1234@cluster0.kmmuu.mongodb.net/tes
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+app.use(express.static(path.join(__dirname, 'public')));
 
 const imageRoutes = require('./routes/image.js');
 app.use(imageRoutes);

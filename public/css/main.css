@@ -1,0 +1,29 @@
+nav {
+    background: #444;
+}
+
+.nav  {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.nav-item {
+    padding: .5rem;
+}
+
+.nav-item:hover {
+    background: #6b6e6c;
+}
+
+.nav-link {
+    color: #f4f4f4;
+}
+
+.nav-item:hover .nav-link{
+    color: #a26de3;
+}
+
+
+
