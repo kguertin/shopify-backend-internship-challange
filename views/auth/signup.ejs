@@ -2,19 +2,20 @@
 <%- include('../includes/nav.ejs') %>
     <div class="container">
         <h1>Sign Up</h1>
-        <form action="/signup" method="POST">
+        <form action="/signUp" method="POST">
             <div class="form-group">
-                <label for=""></label>
-                <input type="text" class="form-control">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control">
             </div>
             <div class="form-group">
-                <label for=""></label>
-                <input type="password" class="form-control">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
             </div>
             <div class="form-group">
-                <label for=""></label>
-                <input type="password" class="form-control">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" class="form-control">
             </div>
+            <button type="submit" class="btn btn-dark">Sign Up</button>
         </form>
     </div>
 <%- include('../includes/footer.ejs') %>
