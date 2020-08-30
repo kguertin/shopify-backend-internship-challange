@@ -14,7 +14,10 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 
 const imageRoutes = require('./routes/image.js');
+const authRoutes = require('./routes/auth.js');
+
 app.use(imageRoutes);
+app.use(authRoutes);
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
 .then(() => {
