@@ -15,7 +15,15 @@ exports.postLogin = (req, res) => {
                 return res.redirect('./login');
             }
 
-            return res.redirect('/');
+            req.session.user = user;
+            req.session.isLoggedIn = true;
+            
+            return req.session.save((err) => {
+                if(err){
+                    console.log(err);
+                }
+                res.redirect('/userImages');
+              })
         })
         .catch(err => console.log(err))
 }

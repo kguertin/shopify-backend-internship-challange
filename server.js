@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
 
+const User = require('./models/user');
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -30,10 +32,32 @@ app.use(session({
     store: store
   }));
 
-const imageRoutes = require('./routes/image.js');
+app.use((req, res, next) => {
+    res.locals.isAuthenticated =  req.session.isLoggedIn;
+    next();
+})
+
+app.use((req, res, next) => {
+    if (!req.session.user) {
+      return next()
+    }
+    User.findById(req.session.user._id)
+      .then(user => {
+        if (!user) {
+          return next()
+        }
+        req.user = user;
+        next();
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  });
+
+const userRoutes = require('./routes/user.js');
 const authRoutes = require('./routes/auth.js');
 
-app.use(imageRoutes);
+app.use(userRoutes);
 app.use(authRoutes);
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
@@ -44,7 +68,6 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
 })
 .catch(err => console.log(err));
 
-//session,
 //upload image
 
 // encrypt passwords, validation, flash error
