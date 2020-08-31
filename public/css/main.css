@@ -21,12 +21,29 @@ nav {
     color: #f4f4f4;
 }
 
-.nav-item:hover .nav-link{
+.nav-item:hover .nav-link,
+.nav-item:hover form .logout{
     color: #dbbdff;
+    background-color: #6b6e6c;
+}
+
+.nav-left {
+    display: flex;
 }
 
 .nav-right {
     display: flex;
+}
+
+.logout {
+    border: none;
+    color: #f4f4f4;
+    background-color: #444444;
+}
+
+.logout:hover {
+    background-color: #6b6e6c;
+    color: #dbbdff
 }
 
 

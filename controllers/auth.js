@@ -28,6 +28,15 @@ exports.postLogin = (req, res) => {
         .catch(err => console.log(err))
 }
 
+exports.postLogout = (req, res) => {
+    req.session.destroy(err => {
+        if(err){
+            console.log(err);
+        }
+        res.redirect('/')
+    })
+}
+
 exports.getSignUp = (req, res) => {
     res.status(200).render('./auth/signup')
 }
