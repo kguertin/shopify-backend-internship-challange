@@ -10,3 +10,7 @@ exports.getUserImages = (req, res) => {
 exports.getAddPhoto = (req, res) => {
     res.status(200).render('./images/addPhoto'); 
 }
+
+exports.postAddPhoto = (req, res) => {
+    console.log(req);
+}

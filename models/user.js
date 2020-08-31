@@ -9,6 +9,11 @@ const userSchema = new Schema({
     password: {
         required: true,
         type: String
+    },
+    imageID: {
+        type: Schema.Types.ObjectId,
+        ref: "Image",
+        required: true
     }
 });
 
