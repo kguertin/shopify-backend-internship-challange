@@ -1,4 +1,5 @@
 const Image = require('../models/image')
+const User = require('../models/user')
 
 exports.getIndex = (req, res) => {
     res.status(200).render('index')
@@ -12,24 +13,22 @@ exports.getAddPhoto = (req, res) => {
     res.status(200).render('./images/addPhoto'); 
 }
 
-exports.postAddPhoto = (req, res) => {
-    const { imageName } = req.body
+exports.postAddPhoto = async (req, res) => {
+    try {
     const images = req.files;
-
-    images.forEach(image => {
+    images.forEach( async image => {
         const imagePath = image.path;
         const newImage = new Image({
-            name: imageName,
+            name: image.originalname.split('.')[0],
             imagePath: imagePath,
             userID: req.user._id
         })
 
-        newImage.save()
-        .then(img => {
-            imageID = img._id;
-            console.log(imageID)
-        })
-        .catch(err => console.log(err));
-
+        const savedImage = await newImage.save()
     });
+
+    res.status(200).redirect('./userImages');
+    } catch(err){
+        console.log(err);
+    }
 }
