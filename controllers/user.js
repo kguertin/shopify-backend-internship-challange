@@ -12,5 +12,7 @@ exports.getAddPhoto = (req, res) => {
 }
 
 exports.postAddPhoto = (req, res) => {
-    console.log(req);
+    const { imageName } = req.body
+    const images = req.files;
+    console.log(images);
 }

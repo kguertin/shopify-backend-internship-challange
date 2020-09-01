@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBSession = require('connect-mongodb-session')(session);
+const multer = require('multer');
+
+
 
 const User = require('./models/user');
 
@@ -19,6 +22,22 @@ const store = new MongoDBSession({
     collection: 'sessions'
 })
 
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${file.originalname}_${Date.now()}`)
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg'){
+    cb(null, true);
+  } else {
+    cb(null, false)
+  }
+}
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -31,6 +50,10 @@ app.use(session({
     saveUninitialized: false,
     store: store
   }));
+app.use(multer({
+  storage:fileStorage,
+  fileFilter: fileFilter
+}).array('image'));
 
 app.use((req, res, next) => {
     res.locals.isAuthenticated =  req.session.isLoggedIn;
