@@ -1,3 +1,4 @@
+const Image = require('../models/image')
 
 exports.getIndex = (req, res) => {
     res.status(200).render('index')
@@ -14,5 +15,21 @@ exports.getAddPhoto = (req, res) => {
 exports.postAddPhoto = (req, res) => {
     const { imageName } = req.body
     const images = req.files;
-    console.log(images);
+
+    images.forEach(image => {
+        const imagePath = image.path;
+        const newImage = new Image({
+            name: imageName,
+            imagePath: imagePath,
+            userID: req.user._id
+        })
+
+        newImage.save()
+        .then(img => {
+            imageID = img._id;
+            console.log(imageID)
+        })
+        .catch(err => console.log(err));
+
+    });
 }
