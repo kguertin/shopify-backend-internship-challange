@@ -1,7 +1,9 @@
 const User = require('../models/user');
 
 exports.getLogin = (req, res) => {
-    res.status(200).render('./auth/login');
+    res.status(200).render('./auth/login', {
+        pageTitle: 'Login'
+    });
 }
 
 exports.postLogin = (req, res) => {
@@ -38,7 +40,9 @@ exports.postLogout = (req, res) => {
 }
 
 exports.getSignUp = (req, res) => {
-    res.status(200).render('./auth/signup')
+    res.status(200).render('./auth/signup', {
+        pageTitle: 'Signup'
+    })
 }
 
 exports.postSignUp = (req, res) => {

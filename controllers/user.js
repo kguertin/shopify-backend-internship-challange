@@ -2,15 +2,26 @@ const Image = require('../models/image')
 const User = require('../models/user')
 
 exports.getIndex = (req, res) => {
-    res.status(200).render('index')
+    res.status(200).render('index', {
+        pageTitle: 'Home'
+    })
 }
 
 exports.getUserImages = (req, res) => {
-    res.render('./images/userImages');
+    Image.find({userID : req.user._id})
+        .then(img => {
+            res.status(200).render('./images/userImages', {
+                pageTitle: "User Images",
+                images: img
+            })
+        })
+        .catch(err => console.log(err)) 
 }
 
 exports.getAddPhoto = (req, res) => {
-    res.status(200).render('./images/addPhoto'); 
+    res.status(200).render('./images/addPhoto', {
+        pageTitle: "Add Photo"
+    }); 
 }
 
 exports.postAddPhoto = async (req, res) => {
