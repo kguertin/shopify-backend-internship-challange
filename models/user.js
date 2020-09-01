@@ -10,11 +10,13 @@ const userSchema = new Schema({
         required: true,
         type: String
     },
-    imageID: {
-        type: Schema.Types.ObjectId,
-        ref: "Image",
-        required: true
-    }
+    images: [{
+        imageID: {
+            type: Schema.Types.ObjectId,
+            ref: "Image",
+            required: true
+        }
+    }]
 });
 
 module.exports = mongoose.model('User', userSchema);

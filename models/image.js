@@ -9,6 +9,11 @@ const imageSchema = new Schema({
     imagePath: {
         required: true,
         type: String
+    },
+    userID: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 });
 
