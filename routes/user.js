@@ -8,6 +8,8 @@ router.get('/', userController.getIndex);
 
 router.get('/userImages', isAuth, userController.getUserImages);
 
+router.get('/userImages/:imageId', userController.getUserImage);
+
 router.get('/addPhoto', isAuth, userController.getAddPhoto);
 
 router.post('/addPhoto', isAuth, userController.postAddPhoto);

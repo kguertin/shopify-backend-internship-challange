@@ -18,6 +18,10 @@ exports.getUserImages = (req, res) => {
         .catch(err => console.log(err)) 
 }
 
+exports.getUserImage = (req, res) => {
+    
+}
+
 exports.getAddPhoto = (req, res) => {
     res.status(200).render('./images/addPhoto', {
         pageTitle: "Add Photo"

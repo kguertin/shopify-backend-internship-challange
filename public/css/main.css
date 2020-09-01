@@ -46,4 +46,9 @@ nav {
     color: #dbbdff
 }
 
+.card-image-top {
+    max-width: 340px;
+    max-height: 520px;
+}
+
 
