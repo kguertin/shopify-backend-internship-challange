@@ -19,7 +19,16 @@ exports.getUserImages = (req, res) => {
 }
 
 exports.getUserImage = (req, res) => {
+    const {imageId } = req.params;
     
+    Image.findById(imageId)
+        .then(image => {
+            res.status(200).render('./images/image', {
+                pageTitle: image.name,
+                imageData: image
+            })
+        })
+        .catch(err => console.log(err));
 }
 
 exports.getAddPhoto = (req, res) => {
@@ -32,10 +41,12 @@ exports.postAddPhoto = async (req, res) => {
     try {
     const images = req.files;
     images.forEach( async image => {
+        console.log(image)
         const imagePath = image.path;
         const newImage = new Image({
             name: image.originalname.split('.')[0],
             imagePath: imagePath,
+            imageSize: image.size,
             userID: req.user._id
         })
 

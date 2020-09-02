@@ -10,6 +10,10 @@ const imageSchema = new Schema({
         required: true,
         type: String
     },
+    imageSize: {
+        required: true,
+        type: Number
+    },
     userID: {
         type: Schema.Types.ObjectId,
         ref: "User",
