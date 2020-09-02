@@ -1,5 +1,6 @@
 const Image = require('../models/image')
 const User = require('../models/user')
+const user = require('../models/user')
 
 exports.getIndex = (req, res) => {
     res.status(200).render('index', {
@@ -40,6 +41,7 @@ exports.getAddPhoto = (req, res) => {
 exports.postAddPhoto = async (req, res) => {
     try {
     const images = req.files;
+    console.log(images)
     images.forEach( async image => {
         console.log(image)
         const imagePath = image.path;
@@ -60,7 +62,11 @@ exports.postAddPhoto = async (req, res) => {
 }
 
 exports.getManageImages = (req, res) => {
-    res.status(200).render('./images/manageUserImages', {
-        pageTitle: 'Manage Images'
-    });
-}
+    Image.find({_id: req.user._id})
+        .then(imageData => {
+            res.status(200).render('./images/manageUserImages', {
+                pageTitle: 'Manage Images',
+                imageData: imageData
+            });
+        }) 
+    }
