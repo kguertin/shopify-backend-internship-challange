@@ -1,6 +1,11 @@
-const Image = require('../models/image')
-const User = require('../models/user')
-const user = require('../models/user')
+const fs = require('fs');
+
+const decompress = require('decompress');
+const unzipper = require('unzipper');
+
+const Image = require('../models/image');
+const User = require('../models/user');
+const { Z_FIXED } = require('zlib');
 
 exports.getIndex = (req, res) => {
     res.status(200).render('index', {
@@ -42,8 +47,22 @@ exports.postAddPhoto = async (req, res) => {
     try {
     const images = req.files;
     console.log(images)
+
     images.forEach( async image => {
-        console.log(image)
+
+        if (image.mimetype === 'application/x-zip-compressed'){
+            decompress(image.path, 'images')
+                .then(files => {
+                    folder = files;
+                    files.forEach(file => {
+                        fs.rename(file.path, `${Date.now()}_${file.path.split('/')[1]}`, () => {
+                            console.log('file moved');
+                        })
+                    })
+                })
+                .catch(err => console.log(err));
+            }
+
         const imagePath = image.path;
         const newImage = new Image({
             name: image.originalname.split('.')[0],
@@ -55,7 +74,7 @@ exports.postAddPhoto = async (req, res) => {
         const savedImage = await newImage.save()
     });
 
-    res.status(200).redirect('./userImages');
+    return res.status(200).redirect('./userImages');
     } catch(err){
         console.log(err);
     }
