@@ -58,3 +58,9 @@ exports.postAddPhoto = async (req, res) => {
         console.log(err);
     }
 }
+
+exports.getManageImages = (req, res) => {
+    res.status(200).render('./images/manageUserImages', {
+        pageTitle: 'Manage Images'
+    });
+}

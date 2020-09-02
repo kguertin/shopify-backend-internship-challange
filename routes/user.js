@@ -14,4 +14,6 @@ router.get('/addPhoto', isAuth, userController.getAddPhoto);
 
 router.post('/addPhoto', isAuth, userController.postAddPhoto);
 
+router.get('/manageUserImages', isAuth, userController.getManageImages);
+
 module.exports = router;
