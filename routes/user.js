@@ -18,4 +18,6 @@ router.get('/manageUserImages', isAuth, userController.getManageImages);
 
 router.post('/updateStatus', isAuth, userController.postUpdateStatus);
 
+router.post('/deleteImage', isAuth, userController.postDeleteImage);
+
 module.exports = router;

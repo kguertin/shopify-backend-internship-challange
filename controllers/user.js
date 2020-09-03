@@ -120,3 +120,7 @@ exports.getManageImages = (req, res) => {
                     });
                 }) 
     }
+
+    exports.postDeleteImage = (req, res) => {
+        
+    }
