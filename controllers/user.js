@@ -112,15 +112,37 @@ exports.getManageImages = (req, res) => {
             })
             .catch(err => console.log(err))
 
-            Image.find()
+            Image.find({userID: req.user._id})
                 .then(imageData => {
                     return res.status(200).render('./images/manageUserImages', {
                         pageTitle: 'Manage Images',
                         imageData: imageData
                     });
-                }) 
+                })
+                .catch(err => console.log(err))
     }
 
     exports.postDeleteImage = (req, res) => {
-        
+        const { imageID } = req.body;
+        Image.findById(imageID)
+            .then(image => {
+                fs.unlink(image.imagePath, err => {
+                    console.log(err);
+                })
+                return Image.deleteOne({
+                    _id: imageID,
+                    userID: req.user._id
+                })
+            })
+            .then(() => {
+                Image.find({userID: req.user._id})
+                    .then(imageData => {
+                        return res.status(200).render('./images/manageUserImages', {
+                            pageTitle: 'Manage Images',
+                            imageData: imageData
+                        });
+                    })
+                    .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err))
     }
