@@ -22,6 +22,25 @@
                     <td><%= image.imagePath %></td>
                     <td><%= image.status %></td>
                     <td><%= image.Description %></td>
+                    <td><a href="#" class="btn btn-dark">View</a></td>
+                    <td>
+                        <form action="" method="POST">
+                            <input type="hidden" name="imageID" value="<%= image._id %>">
+                            <button class="btn btn-dark">Change Status</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="POST">
+                            <input type="hidden" name="imageID" value="<%= image._id %>">
+                            <button class="btn btn-dark">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="" method="POST">
+                            <input type="hidden" name="imageID" value="<%= image._id %>">
+                            <button class="btn btn-dark">Delete</button>
+                        </form>
+                    </td>
                 </tr>
 
             <% }) %> 
