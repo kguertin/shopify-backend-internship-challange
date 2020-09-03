@@ -22,9 +22,9 @@
                     <td><%= image.imagePath %></td>
                     <td><%= image.status %></td>
                     <td><%= image.Description %></td>
-                    <td><a href="#" class="btn btn-dark">View</a></td>
+                    <td><a href="/userImages/<%= image._id %>" class="btn btn-dark">View</a></td>
                     <td>
-                        <form action="" method="POST">
+                        <form action="/updateStatus" method="POST">
                             <input type="hidden" name="imageID" value="<%= image._id %>">
                             <button class="btn btn-dark">Change Status</button>
                         </form>

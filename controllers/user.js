@@ -7,6 +7,7 @@ const unzipper = require('unzipper');
 const Image = require('../models/image');
 const User = require('../models/user');
 const { Z_FIXED } = require('zlib');
+const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 
 exports.getIndex = (req, res) => {
     res.status(200).render('index', {
@@ -94,4 +95,28 @@ exports.getManageImages = (req, res) => {
                 imageData: imageData
             });
         }) 
+    }
+
+    exports.postUpdateStatus = (req, res) => {
+        const { imageID } = req.body;
+        Image.find({_id: imageID})
+            .then(image => {
+                const updatedImage = image[0];
+                if(updatedImage.status === 'private'){
+                    updatedImage.status = 'public'
+
+                } else {
+                    updatedImage.status = 'private'
+                }
+                updatedImage.save()
+            })
+            .catch(err => console.log(err))
+
+            Image.find()
+                .then(imageData => {
+                    return res.status(200).render('./images/manageUserImages', {
+                        pageTitle: 'Manage Images',
+                        imageData: imageData
+                    });
+                }) 
     }
