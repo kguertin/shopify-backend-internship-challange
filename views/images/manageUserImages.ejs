@@ -2,5 +2,30 @@
 <%- include('../includes/nav.ejs') %>
 <div class="container">
     <h1>manage user images</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Thumbnail</th>
+                <th>File Status</th>
+                <th>File Description</th>
+                <th>View Image</th>
+                <th>Change Status</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% imageData.forEach(image => { %>
+                <tr>
+                    <td><%= image.name %></td>
+                    <td><%= image.imagePath %></td>
+                    <td><%= image.status %></td>
+                    <td><%= image.Description %></td>
+                </tr>
+
+            <% }) %> 
+        </tbody>
+    </table>
 </div>
 <%- include('../includes/footer.ejs') %>

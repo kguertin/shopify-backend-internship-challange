@@ -60,7 +60,6 @@ exports.postAddPhoto = async (req, res) => {
             })
             zippedFiles.forEach(async file => {
                 const fileName = file.path.split('_')[1].split('.')[0];
-                console.log(fileName);
                 const newImage = new Image({
                     name: fileName,
                     imagePath: path.join('images',file.path),
@@ -88,7 +87,7 @@ exports.postAddPhoto = async (req, res) => {
 }
 
 exports.getManageImages = (req, res) => {
-    Image.find({_id: req.user._id})
+    Image.find({userID: req.user._id})
         .then(imageData => {
             res.status(200).render('./images/manageUserImages', {
                 pageTitle: 'Manage Images',
