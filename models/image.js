@@ -3,7 +3,9 @@ const Schema = mongoose.Schema
 
 const imageSchema = new Schema({
     name: {
-        required: true,
+        type: String
+    },
+    description: {
         type: String
     },
     imagePath: {

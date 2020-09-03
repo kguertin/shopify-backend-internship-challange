@@ -92,7 +92,6 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
 })
 .catch(err => console.log(err));
 
-// add imageid to array in user object
 // show uploaded image data.
 //delete images 
 //private and public images

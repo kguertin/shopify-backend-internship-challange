@@ -46,22 +46,24 @@ exports.getAddPhoto = (req, res) => {
 exports.postAddPhoto = async (req, res) => {
     try {
     const images = req.files;
-    console.log(images)
 
     images.forEach( async image => {
 
         if (image.mimetype === 'application/x-zip-compressed'){
-            decompress(image.path, 'images')
+            decompress(image.path, 'images', {
+                map: file => {
+                    file.path =  `${Date.now()}_${file.path.split('/')[1]}`
+                    return file
+                }
+            })
                 .then(files => {
-                    folder = files;
                     files.forEach(file => {
-                        fs.rename(file.path, `${Date.now()}_${file.path.split('/')[1]}`, () => {
-                            console.log('file moved');
-                        })
+                        
                     })
                 })
                 .catch(err => console.log(err));
-            }
+            return
+        }
 
         const imagePath = image.path;
         const newImage = new Image({
