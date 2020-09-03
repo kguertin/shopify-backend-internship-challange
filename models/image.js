@@ -3,7 +3,8 @@ const Schema = mongoose.Schema
 
 const imageSchema = new Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     description: {
         type: String
@@ -12,9 +13,9 @@ const imageSchema = new Schema({
         required: true,
         type: String
     },
-    imageSize: {
-        required: true,
-        type: Number
+    status: {
+        type: String,
+        default: 'private'
     },
     userID: {
         type: Schema.Types.ObjectId,

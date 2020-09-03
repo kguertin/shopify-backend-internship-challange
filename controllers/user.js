@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path')
 
 const decompress = require('decompress');
 const unzipper = require('unzipper');
@@ -46,22 +47,27 @@ exports.getAddPhoto = (req, res) => {
 exports.postAddPhoto = async (req, res) => {
     try {
     const images = req.files;
+    console.log(images)
 
     images.forEach( async image => {
 
         if (image.mimetype === 'application/x-zip-compressed'){
-            decompress(image.path, 'images', {
+            const zippedFiles = await decompress(image.path, 'images', {
                 map: file => {
                     file.path =  `${Date.now()}_${file.path.split('/')[1]}`
                     return file
                 }
             })
-                .then(files => {
-                    files.forEach(file => {
-                        
-                    })
+            zippedFiles.forEach(async file => {
+                const fileName = file.path.split('_')[1].split('.')[0];
+                console.log(fileName);
+                const newImage = new Image({
+                    name: fileName,
+                    imagePath: path.join('images',file.path),
+                    userID: req.user._id
                 })
-                .catch(err => console.log(err));
+                const savedImage = await newImage.save();
+            })
             return
         }
 
@@ -69,7 +75,6 @@ exports.postAddPhoto = async (req, res) => {
         const newImage = new Image({
             name: image.originalname.split('.')[0],
             imagePath: imagePath,
-            imageSize: image.size,
             userID: req.user._id
         })
 
