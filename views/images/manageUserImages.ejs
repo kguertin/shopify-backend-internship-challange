@@ -2,40 +2,47 @@
 <%- include('../includes/nav.ejs') %>
 <div class="container">
     <h1>manage user images</h1>
-
-    <div class="bulk-operations">
-        <form action="/bulkOperation" POST="POST">
-            <select class="form-control" name="operation" id="">
-                <option value=""></option>
-            </select>
+        <form action="/bulkOperation" method="POST">
+            <div class="form-group">
+                <table class="table table-dark">
+                    <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>File Name</th>
+                    <th>Thumbnail</th>
+                    <th>File Status</th>
+                    <th>File Description</th>
+                    <th>View Image</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% imageData.forEach(image => { %>
+                    <tr>
+                        <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value="<%= image._id %>"></td>
+                        <td><%= image.name %></td>
+                        <td><%= image.imagePath %></td>
+                        <td><%= image.status %></td>
+                        <td><%= image.Description %></td>
+                        <td><a href="/userImages/<%= image._id %>" class="btn btn-dark">View</a></td>
+                        <td>
+                            <a class="btn btn-dark" href="/editImage?imageId=<%= image._id %>">Edit</a>
+                        </td>
+                    </tr>
+                    
+                    <% }) %> 
+                </tbody>
+            </table>
+            
+            <p>Select All: <input id="selectAllBoxes" type="checkbox"></p>
+        </div>
+        <select class="form-control" name="operation" id="">
+            <option value="delete">Delete</option>
+            <option value="public">Make Public</option>
+            <option value="private">Make Private</option>
+        </select>
+        <button type="submit" class="btn btn-primary form-control">Perform Task</button>
         </form>
     </div>
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th>File Name</th>
-                <th>Thumbnail</th>
-                <th>File Status</th>
-                <th>File Description</th>
-                <th>View Image</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% imageData.forEach(image => { %>
-                <tr>
-                    <td><%= image.name %></td>
-                    <td><%= image.imagePath %></td>
-                    <td><%= image.status %></td>
-                    <td><%= image.Description %></td>
-                    <td><a href="/userImages/<%= image._id %>" class="btn btn-dark">View</a></td>
-                    <td>
-                        <a class="btn btn-dark" href="/editImage?imageId=<%= image._id %>">Edit</a>
-                    </td>
-                </tr>
-
-            <% }) %> 
-        </tbody>
-    </table>
-</div>
-<%- include('../includes/footer.ejs') %>
+    <%- include('../includes/footer.ejs') %>
+    

@@ -180,3 +180,19 @@ exports.getManageImages = (req, res) => {
 
         res.redirect('/manageUserImages');
     }
+
+    exports.postBulkOperation = (req, res) => {
+        const imagesToUpdate = req.body['checkBoxArray[]'];
+        const { operation } =  req.body;
+        const userId = req.user;
+
+        if(operation === 'public') {
+
+        }
+
+        if(operation === 'private') {
+
+        }
+
+        if(operation === 'delete')
+    }

@@ -24,4 +24,6 @@ router.get('/editImage', isAuth, userController.getEditImage);
 
 router.post('/editImage', isAuth, userController.postEditImage)
 
+router.post('/bulkOperation', isAuth, userController.postBulkOperation);
+
 module.exports = router;
