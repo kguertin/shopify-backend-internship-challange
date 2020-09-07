@@ -20,4 +20,6 @@ router.post('/updateStatus', isAuth, userController.postUpdateStatus);
 
 router.post('/deleteImage', isAuth, userController.postDeleteImage);
 
+router.get('/editImage', isAuth, userController.getEditImage);
+
 module.exports = router;

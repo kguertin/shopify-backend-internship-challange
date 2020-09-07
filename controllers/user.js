@@ -6,8 +6,6 @@ const unzipper = require('unzipper');
 
 const Image = require('../models/image');
 const User = require('../models/user');
-const { Z_FIXED } = require('zlib');
-const { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } = require('constants');
 
 exports.getIndex = (req, res) => {
     res.status(200).render('index', {
@@ -114,6 +112,7 @@ exports.getManageImages = (req, res) => {
 
             Image.find({userID: req.user._id})
                 .then(imageData => {
+                    console.log(imageData)
                     return res.status(200).render('./images/manageUserImages', {
                         pageTitle: 'Manage Images',
                         imageData: imageData
@@ -145,4 +144,17 @@ exports.getManageImages = (req, res) => {
                     .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
+    }
+
+    exports.getEditImage = (req, res) => {
+        const imageId = req.query.imageId
+        Image.findOne({_id: imageId})
+            .then(image => {
+              res.render('./images/editImage', {
+                  pageTitle: 'Edit Image',
+                  imageData: image
+              }) 
+            })
+            .catch(err => console.log(err))
+
     }
