@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Edit Images</h1>
     <img src="/<%= imageData.imagePath %>" alt="">
-    <form action="/editPhoto" method="POST">
+    <form action="/editImage" method="POST">
         <div class="form-group">
             <label for=filename>Filename</label>
             <input class="form-control" id="filename" type="text" name="filename" value="<%= imageData.name %>">
@@ -23,6 +23,7 @@
                 <% } %>
             </select>
         </div>
+        <input type="hidden" name="imageId" value="<%= imageData._id %>">
         <button class="btn btn-dark" type="submit">Edit</button>
     </form>
 </div>

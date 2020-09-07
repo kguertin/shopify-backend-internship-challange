@@ -22,4 +22,6 @@ router.post('/deleteImage', isAuth, userController.postDeleteImage);
 
 router.get('/editImage', isAuth, userController.getEditImage);
 
+router.post('/editImage', isAuth, userController.postEditImage)
+
 module.exports = router;

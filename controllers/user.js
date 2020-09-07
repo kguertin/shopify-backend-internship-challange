@@ -8,9 +8,14 @@ const Image = require('../models/image');
 const User = require('../models/user');
 
 exports.getIndex = (req, res) => {
-    res.status(200).render('index', {
-        pageTitle: 'Home'
-    })
+    Image.find()
+        .then(images => {
+            res.status(200).render('index', {
+                pageTitle: 'Home',
+                imageData: images
+            })
+        })
+        .catch(err => console.log(err))
 }
 
 exports.getUserImages = (req, res) => {
@@ -150,6 +155,7 @@ exports.getManageImages = (req, res) => {
         const imageId = req.query.imageId
         Image.findOne({_id: imageId})
             .then(image => {
+                console.log(image)
               res.render('./images/editImage', {
                   pageTitle: 'Edit Image',
                   imageData: image
@@ -157,4 +163,17 @@ exports.getManageImages = (req, res) => {
             })
             .catch(err => console.log(err))
 
+    }
+
+    exports.postEditImage = async (req, res) => {
+        const { filename, description, status, imageId } = req.body;
+        console.log(imageId);
+        const updatedImage = await Image.findOneAndUpdate({_id: imageId}, {
+            name: filename, 
+            description: description,
+            status: status
+        });
+        updatedImage.save();
+
+        res.redirect('/manageUserImages');
     }
