@@ -8,7 +8,7 @@ const Image = require('../models/image');
 const User = require('../models/user');
 
 exports.getIndex = (req, res) => {
-    Image.find()
+    Image.find({status: 'public'})
         .then(images => {
             res.status(200).render('index', {
                 pageTitle: 'Home',
