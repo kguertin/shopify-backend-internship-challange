@@ -24,7 +24,13 @@
             </select>
         </div>
         <input type="hidden" name="imageId" value="<%= imageData._id %>">
-        <button class="btn btn-dark" type="submit">Edit</button>
+        <button class="btn btn-dark form-control" type="submit">Edit</button>
     </form>
+    <td>
+        <form action="/deleteImage" method="POST">
+            <input type="hidden" name="imageID" value="<%= imageData._id %>">
+            <button class="btn btn-danger form-control">Delete</button>
+        </form>
+    </td>
 </div>
 <%- include('../includes/footer.ejs') %>

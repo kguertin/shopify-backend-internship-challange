@@ -18,9 +18,7 @@
                 <th>File Status</th>
                 <th>File Description</th>
                 <th>View Image</th>
-                <th>Change Status</th>
                 <th>Edit</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -32,23 +30,7 @@
                     <td><%= image.Description %></td>
                     <td><a href="/userImages/<%= image._id %>" class="btn btn-dark">View</a></td>
                     <td>
-                        <form action="/updateStatus" method="POST">
-                            <input type="hidden" name="imageID" value="<%= image._id %>">
-                            <button class="btn btn-dark">Change Status</button>
-                        </form>
-                    </td>
-                    <td>
                         <a class="btn btn-dark" href="/editImage?imageId=<%= image._id %>">Edit</a>
-                        <!-- <form action="" method="POST">
-                            <input type="hidden" name="imageID" value="<%= image._id %>">
-                            <button class="btn btn-dark">Edit</button>
-                        </form> -->
-                    </td>
-                    <td>
-                        <form action="/deleteImage" method="POST">
-                            <input type="hidden" name="imageID" value="<%= image._id %>">
-                            <button class="btn btn-dark">Delete</button>
-                        </form>
                     </td>
                 </tr>
 

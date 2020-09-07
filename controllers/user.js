@@ -6,10 +6,13 @@ const unzipper = require('unzipper');
 
 const Image = require('../models/image');
 const User = require('../models/user');
+const user = require('../models/user');
 
 exports.getIndex = (req, res) => {
     Image.find({status: 'public'})
+    .populate('userID')
         .then(images => {
+            console.log(images)
             res.status(200).render('index', {
                 pageTitle: 'Home',
                 imageData: images
