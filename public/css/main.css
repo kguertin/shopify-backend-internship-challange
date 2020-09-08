@@ -60,3 +60,11 @@ nav {
     justify-content: center;
     align-content: center;
 }
+
+.img-container {
+    padding-top: 50px;
+}
+
+.btn {
+    margin: 15px;
+}

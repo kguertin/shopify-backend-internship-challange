@@ -182,7 +182,8 @@ exports.getManageImages = (req, res) => {
     }
 
     exports.postBulkOperation = (req, res) => {
-        const imagesToUpdate = req.body['checkBoxArray[]'];
+        let imagesToUpdate = req.body['checkBoxArray[]'];
+        if (typeof imagesToUpdate === 'string') imagesToUpdate = [imagesToUpdate]
         const { operation } =  req.body;
         const userId = req.user;
 
@@ -196,7 +197,7 @@ exports.getManageImages = (req, res) => {
         
         if(operation === 'private') {
              imagesToUpdate.forEach(async id => {
-                const updatedImages = await Image.findOneAndUpdate({_id: id}, {status: 'public'});
+                const updatedImages = await Image.findOneAndUpdate({_id: id}, {status: 'private'});
                 updatedImages.save();
             })
             return res.redirect('/manageUserImages');
