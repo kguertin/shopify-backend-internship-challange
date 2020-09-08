@@ -1,8 +1,8 @@
-# Rose Rocket Coding Challange 2020 - Dispatch Task Manager
+# Shopify Backend Developer Internship Challange
 
 ### How to Start App
 In order to use the image repository node must be installed. You just have to run the following in the terminal.
-First install all dependencies by running: 
+First install all dependencies by running. Application must be provided with a valid mongo db connection, just create a .env file, make a MONGODB_URI variable and assign the database connection. 
 ```
 npm install 
 ```
