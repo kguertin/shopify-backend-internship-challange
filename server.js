@@ -15,7 +15,7 @@ const User = require('./models/user');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = "mongodb+srv://kevin:node1234@cluster0.kmmuu.mongodb.net/shopify";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const store = new MongoDBSession({
     uri: MONGODB_URI,
