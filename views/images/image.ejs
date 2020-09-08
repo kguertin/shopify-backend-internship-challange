@@ -1,7 +1,11 @@
 <%- include('../includes/header.ejs') %>
 <%- include('../includes/nav.ejs') %>
-<div class="container">
-    <img src="/<%= imageData.imagePath %>" alt="">
-    <p><strong>Image Name:</strong> <%= imageData.name %></p>
+<div class="container center-item">
+    <div>
+        <img class="viewImage" src="/<%= imageData.imagePath %>" alt="">
+        <p><strong>Image Name:</strong> <%= imageData.name %></p>
+        <p><strong>Image Description:</strong> <%= imageData.description %></p>
+        <p><strong>Status</strong> <%= imageData.status %></p>
+    </div>
 </div>
 <%- include('../includes/footer.ejs') %>

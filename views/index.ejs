@@ -1,15 +1,15 @@
 <%- include('./includes/header.ejs') %>
 <%- include('./includes/nav.ejs') %>
     <div class="container">
-        <h1>User Images</h1>
+        <h1>All Images</h1>
         <div class="row row-cols-3">
         <% imageData.forEach(image => { %>
             <div class="col">
                 <div class="card">
                     <img src="/<%= image.imagePath %>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><%= image.imagePath %></h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title"><%= image.name %></h5>
+                        <p class="card-text"><strong>Posted By: </strong> <%= image.userID.username %></p>
                         <a href="/userImages/<%= image._id %>" class="btn btn-primary">View Image</a>
                     </div>
                 </div>

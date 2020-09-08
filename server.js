@@ -92,10 +92,6 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true})
 })
 .catch(err => console.log(err));
 
-//delete images 
-//edit images
-//private and public images
-
 // encrypt passwords, validation, flash error
 
 //search images

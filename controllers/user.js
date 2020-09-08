@@ -12,10 +12,10 @@ exports.getIndex = (req, res) => {
     Image.find({status: 'public'})
     .populate('userID')
         .then(images => {
-            console.log(images)
             res.status(200).render('index', {
                 pageTitle: 'Home',
-                imageData: images
+                imageData: images,
+
             })
         })
         .catch(err => console.log(err))
@@ -187,12 +187,26 @@ exports.getManageImages = (req, res) => {
         const userId = req.user;
 
         if(operation === 'public') {
-
+            imagesToUpdate.forEach(async id => {
+                const updatedImages = await Image.findOneAndUpdate({_id: id}, {status: 'public'});
+                updatedImages.save();
+            })
+            return res.redirect('/manageUserImages');
         }
-
+        
         if(operation === 'private') {
-
+             imagesToUpdate.forEach(async id => {
+                const updatedImages = await Image.findOneAndUpdate({_id: id}, {status: 'public'});
+                updatedImages.save();
+            })
+            return res.redirect('/manageUserImages');
         }
 
-        if(operation === 'delete')
+        if(operation === 'delete'){
+            imagesToUpdate.forEach(async id => {
+                const updatedImages = await Image.findByIdAndDelete(id);
+                updatedImages.save();
+            })
+            return res.redirect('/manageUserImages');
+        }
     }
